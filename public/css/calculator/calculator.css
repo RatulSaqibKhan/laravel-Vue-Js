@@ -1,0 +1,110 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.cBox {
+  border: 1px solid rgba(95, 95, 95, 0.2);
+  cursor: pointer;
+  display: inline-block;
+  float: none;
+  font-size: 20px;
+  margin-right: -4px;
+  max-width: 8rem;
+  min-width: 6rem;
+  min-height: 5rem;
+  overflow: hidden;
+  position: relative;
+  padding: 2.5rem;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.cBox:hover {
+  background: #75B1A9;
+}
+
+.cBox-na:hover {
+  background: #ACD0C0 !important;
+}
+
+.cTop {
+  display: inline-block;
+  float: none;
+  text-align: right;
+  margin-right:-4px;
+  max-width: 32rem;
+  min-width: 24rem;
+  height: 80px;
+  font-size: 20px;
+  border: 1px solid rgba(95, 95, 95, 0.2);
+  padding: 2.5rem;
+}
+
+.containerBox {
+  width: 400px;
+	height: auto;
+
+  margin: 1px auto;
+  padding: 0;
+
+  /* prevent selection of text inside keys */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.row-centered {
+  text-align:center;
+}
+.row {
+  height: 80px;
+  margin-bottom: -1px;
+}
+
+h1,
+h2 {
+  font-family: Bitter, sans-serif;
+}
+
+.header {
+  background: #ACD0C0;
+  color: #4F6457;
+  height: 100%;
+  text-align: center;
+  padding-top: 10vh;
+}
+
+.header h1 {
+  font-size: 46px;
+  color: #4F6457;
+  margin-bottom: 2.6rem;
+  text-shadow: 1px 1px 5px rgba(125, 125, 125, 0.1),
+               2px 2px 5px rgba(125, 125, 125, 0.1),
+               3px 3px 5px rgba(125, 125, 125, 0.1),
+               4px 4px 5px rgba(125, 125, 125, 0.1),
+               5px 5px 5px rgba(125, 125, 125, 0.1);
+}
+
+.header p {
+  color: #662E1C;
+  font-size: 26px;
+  margin: 2.6rem 0;
+}
+
+/*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
+.ink {
+	display: block; position: absolute;
+	background: #D9B44A;
+	border-radius: 100%;
+	transform: scale(0);
+}
+/*animation effect*/
+.ink.animate {animation: ripple 0.3s linear;}
+@keyframes ripple {
+	/*scale the element to 250% to safely cover the entire link and fade it out*/
+	100% {opacity: 0; transform: scale(2.5);}
+}
