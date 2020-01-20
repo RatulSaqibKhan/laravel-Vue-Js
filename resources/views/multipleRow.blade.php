@@ -122,10 +122,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(input, index) in inputs">
-                                    <td><input type="text" name="std_name[]" class="form-control" v-model="input.std_name"></td>
-                                    <td><input type="text" name="std_roll[]" class="form-control" v-model="input.std_roll"></td>
-                                    {{-- <td><input type="text" name="std_roll[]" class="form-control" v-model="input.std_name + input.std_roll" readonly></td> --}}
+                                <tr v-for="(input, index) in inputs" :key="index">
+                                    <td>
+                                        <input type="text" name="std_name[]" class="form-control" v-model="input.std_name">
+                                        <span class="text-danger" v-if="errors['std_name.' + index]">@{{ errors['std_name.' + index][0] }}</span>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="std_roll[]" class="form-control" v-model="input.std_roll">
+                                        <span class="text-danger" v-if="errors['std_roll.' + index]">@{{ errors['std_roll.' + index][0] }}</span>
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-xs btn-danger" @click="deleteRow(index,input)"><span class="fa fa-trash"></span></button>&nbsp;
                                         <button type="button" class="btn btn-xs btn-success" @click="addRow"><span class="fa fa-plus"></span></button>
@@ -151,7 +156,8 @@
             successMessage: "",
             inputs: [
                 {std_name: '', std_roll: ''}
-            ]
+            ],
+            errors : []
         },
 
         methods: {
@@ -173,13 +179,20 @@
                 var form = document.querySelector("#multi-row-form");
                 var request = new XMLHttpRequest();
                 var formData = new FormData(form);
+                var thisContext = this;
                 axios.post('add-multi-row-form-data', formData).then(
                     function (response) {
                         app.displayMessage(response);
                     }
-                );
+                ).catch(function (error) {
+                    console.log(error.response.data.errors);
+                    thisContext.updateErrors(error.response.data.errors);
+                });
             },
 
+            updateErrors: function (errorsData) {
+                this.errors = errorsData;
+            },
             displayMessage : function(response){
                 response.data.status===1 ? app.successMessage = response.data.message : app.errorMessage = response.data.message;
             }

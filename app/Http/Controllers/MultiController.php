@@ -26,6 +26,11 @@ class MultiController extends Controller
             'message'=>'',
         ];
 
+        $request->validate([
+            'std_name.*' => 'required',
+            'std_roll.*' => 'required',
+        ]);
+
         try{
 
             DB::beginTransaction();
